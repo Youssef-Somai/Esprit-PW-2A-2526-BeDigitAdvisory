@@ -1,25 +1,26 @@
-# Digit Advisory AI
+# Digit Advisory
 
 ## Overview
 
-Be-Digit Advisory AI is an intelligent digital consulting platform designed to help organizations achieve digital transformation using Artificial Intelligence and sustainable (Green IT) solutions.
+Digit Advisory is a web-based consulting platform that connects companies with expert consultants across multiple domains of consulting and audit.
+
+The platform helps organizations identify their needs through quiz-based assessment, receive tailored recommendations, and access the most relevant experts and certifications (ISO standards).
 
 This project was developed at Esprit School of Engineering – Tunisia (Academic Year 2025–2026).
-
-The platform acts as a virtual consultant capable of analyzing companies and providing tailored recommendations, strategies, and digital transformation roadmaps.
 
 ---
 
 ## Features
 
-* AI-powered digital consulting assistant
-* Digital maturity assessment
-* Personalized recommendations
-* Digital transformation roadmap generation
-* Green IT suggestions (eco-friendly solutions)
-* User dashboard
-* Access to human consultants for personalized support
-* Recommendations of specialized service providers to ensure effective implementation
+* Platform connecting companies with expert consultants
+* Quiz-based assessment to evaluate company needs and maturity
+* Smart recommendations of consultants based on results
+* Certification (ISO) recommendation according to company capacity
+* Portfolio management for consultants and companies
+* Project management (missions, candidatures, livrables)
+* Internal messaging system (conversation & messages)
+* User dashboard (admin, company, consultant)
+* Access to expert consultants for personalized support
 
 ---
 
@@ -76,8 +77,8 @@ Handles business logic and communication between the Model and View using PHP.
 
 ## Academic Context
 
-Developed as part of a Web Technologies Project (2nd Year)
-Esprit School of Engineering – Tunisia
+Developed as part of a Web Technologies Project (2nd Year)  
+Esprit School of Engineering – Tunisia  
 Academic Year: 2025–2026
 
 ---
@@ -89,29 +90,3 @@ Academic Year: 2025–2026
 ```bash
 git clone https://github.com/Youssef-Somai/Esprit-PW-2A24-2526-DigitAdvisory.git
 cd DigitAdvisory
-```
-
-### Requirements
-
-* PHP >= 7.x
-* MySQL
-* Apache Server (XAMPP recommended)
-
-### Running the Project
-
-1. Place the project in the `htdocs` folder (if using XAMPP)
-2. Start Apache and MySQL
-3. Import the database into phpMyAdmin
-4. Access the project via `http://localhost/DigitAdvisory`
-
----
-
-## Contribution
-
-Contributions are welcome. Feel free to fork the repository and submit a pull request.
-
----
-
-## License
-
-This project is developed for academic purposes.
