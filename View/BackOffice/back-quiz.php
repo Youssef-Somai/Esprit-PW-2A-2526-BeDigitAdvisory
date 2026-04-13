@@ -1,4 +1,22 @@
-﻿<!DOCTYPE html>
+﻿<?php
+require_once '../../Controller/QuizC.php';
+
+$quizC = new QuizC();
+
+
+if (isset($_GET['id'])) {
+    $quizC->deleteQuiz($_GET['id']);
+
+    
+    header('Location: back-quiz.php');
+    exit();
+}
+
+
+$list = $quizC->listQuiz();
+?>
+
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -28,10 +46,17 @@
         .data-table { width: 100%; border-collapse: collapse; }
         .data-table th, .data-table td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--gray-light); }
         .data-table th { color: var(--gray); font-weight: 500; }
-        .badge { padding: 0.25rem 0.75rem; border-radius: var(--radius-full); font-size: 0.85rem; font-weight: 500; display: inline-block;}
+        .badge { padding: 0.25rem 0.75rem; border-radius: var(--radius-full); font-size: 0.85rem; font-weight: 500; display: inline-block; }
         .badge.success { background: rgba(16, 185, 129, 0.1); color: var(--success); }
         .badge.primary { background: rgba(37, 99, 235, 0.1); color: var(--primary); }
         .btn-sm { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
+        .quiz-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
     </style>
 </head>
 <body class="admin-theme">
@@ -70,8 +95,10 @@
 
             <section class="fade-in-up">
                 <div style="display: flex; justify-content: space-between; align-items: center;" class="mb-2">
-                    <h2>Gestion des Quiz (Questions & Choix)</h2>
-                    <button class="btn btn-primary"><i class="fa-solid fa-plus"></i> Nouveau Questionnaire</button>
+                    <h2>Gestion des Quiz</h2>
+                    <button class="btn btn-primary" onclick="window.location.href='Create-quiz.php'">
+                        <i class="fa-solid fa-plus"></i> Nouveau Quiz
+                    </button>
                 </div>
 
                 <div class="card admin-card hover-zoom">
@@ -79,25 +106,47 @@
                     <table class="data-table mt-1">
                         <thead>
                             <tr>
-                                <th>Titre du Quiz</th>
-                                <th>Nb Questions</th>
-                                <th>Cible</th>
-                                <th>Statut</th>
+                                <th>id_quiz</th>
+                                <th>titre</th>
+                                <th>description</th>
+                                <th>image</th>
+                                <th>date_creation</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php
+                            foreach ($list as $quiz) {
+                            ?>
                             <tr>
-                                <td>Quiz Maturité Numérique</td>
-                                <td>15</td>
-                                <td>Entreprises</td>
-                                <td><span class="badge success">Actif</span></td>
+                                <td><?php echo $quiz['id_quiz']; ?></td>
+                                <td><?php echo $quiz['titre']; ?></td>
+                                <td><?php echo $quiz['description']; ?></td>
                                 <td>
-                                    <button class="btn btn-outline btn-sm"><i class="fa-solid fa-eye"></i> Questions</button>
-                                    <button class="btn btn-outline btn-sm"><i class="fa-solid fa-pen"></i></button>
-                                    <button class="btn btn-outline btn-sm" style="color:var(--danger); border-color:var(--danger);"><i class="fa-solid fa-trash"></i></button>
+                                    <img src="../../uploads/<?php echo $quiz['image']; ?>" alt="quiz" class="quiz-image">
+                                </td>
+                                <td><?php echo $quiz['date_creation']; ?></td>
+                                <td>
+                                <a href="questions.php?id=<?php echo $quiz['id_quiz']; ?>" class="btn btn-outline btn-sm">
+                                <i class="fa-solid fa-eye"></i> Questions
+                                </a>
+
+                                    <form method="POST" action="updateQuiz.php" style="display:inline-block;">
+                                        <input type="hidden" value="<?php echo $quiz['id_quiz']; ?>" name="id_quiz">
+                                        <button type="submit" name="update" class="btn btn-outline btn-sm">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </button>
+                                    </form>
+                                <a href="back-quiz.php?id=<?php echo $quiz['id_quiz']; ?>"
+                                      class="btn-delete"
+                                    onclick="return confirm('Voulez-vous vraiment supprimer ce quiz ?');">
+                                    <i class="fa-solid fa-trash"></i> Supprimer
+                                </a>
                                 </td>
                             </tr>
+                            <?php
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
